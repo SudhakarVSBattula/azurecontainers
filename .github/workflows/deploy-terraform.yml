@@ -49,20 +49,20 @@ jobs:
       - name: "Build and push image"
         uses: azure/docker-login@v1
         with:
-          login-server: tfdokeracry.azurecntrgy.io
+          login-server: tfdokeracry.azurecr.io
           username: ${{ secrets.ARM_CLIENT_ID }}
           password: ${{ secrets.ARM_CLIENT_SECRET }}
       - run: |
-          docker build . -t tfdokeracry.azurecntrgy.io/sampleapp:${{ github.sha }}
-          docker push tfdokeracry.azurecntrgy.io/sampleapp:${{ github.sha }}
+          docker build . -t tfdokeracry.azurecr.io/sampleapp:${{ github.sha }}
+          docker push tfdokeracry.azurecr.io/sampleapp:${{ github.sha }}
 
       - name: "Deploy to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
         with:
           resource-group: acntrgy
           dns-name-label: acntrgy${{ github.run_number }}
-          image: tfdokeracry.azurecntrgy.io/sampleapp:${{ github.sha }}
-          registry-login-server: tfdokeracry.azurecntrgy.io
+          image: tfdokeracry.azurecr.io/sampleapp:${{ github.sha }}
+          registry-login-server: tfdokeracry.azurecr.io
           registry-username: ${{ secrets.ARM_CLIENT_ID }}
           registry-password: ${{ secrets.ARM_CLIENT_SECRET }}
           name: terraform-docker-container
