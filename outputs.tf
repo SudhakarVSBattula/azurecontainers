@@ -1,3 +1,3 @@
 output "azurerm_resource_group" {
-  value = azurerm_resource_group.azurecntrg.name
+  value = azurerm_resource_group.azurecntrgy.name
 }
