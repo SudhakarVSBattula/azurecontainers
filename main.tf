@@ -1,11 +1,11 @@
-resource "azurerm_resource_group" "azurecrg" {
-  name     = "acrg"
+resource "azurerm_resource_group" "azurecntrg" {
+  name     = "acntrg"
   location = var.location
 }
 
-resource "azurerm_container_registry" "tfdockeracrg" {
-  name                = "tfdockeracr"
-  resource_group_name = azurerm_resource_group.azurecrg.name
-  location            = azurerm_resource_group.azurecrg.location
+resource "azurerm_container_registry" "tfdokeracrg" {
+  name                = "tfdokeracr"
+  resource_group_name = azurerm_resource_group.azurecntrg.name
+  location            = azurerm_resource_group.azurecntrg.location
   sku                 = "Basic"
 }

@@ -43,7 +43,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            registryId=$(az acr show --name terraformdockeracr --resource-group azure-container-rg --query id --output tsv)
+            registryId=$(az acr show --name terraformdockeracr --resource-group acntrg --query id --output tsv)
             MSYS_NO_PATHCONV=1 az role assignment create --assignee ${{ secrets.ARM_CLIENT_ID }} --scope $registryId --role AcrPush
 
       - name: "Build and push image"
@@ -59,7 +59,7 @@ jobs:
       - name: "Deploy to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
         with:
-          resource-group: acrg
+          resource-group: acntrg
           dns-name-label: acrg${{ github.run_number }}
           image: terraformdockeracr.azurecr.io/sampleapp:${{ github.sha }}
           registry-login-server: terraformdockeracr.azurecr.io
